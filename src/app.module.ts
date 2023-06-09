@@ -9,7 +9,7 @@ import { NaverModule } from './modules/naver.module';
 import { PrismaModule } from './modules/prisma.module';
 
 @Module({
-  imports: [HackerModule, BbcModule, PrismaModule, MusicModule, ClimateModule, NaverModule],
+  imports: [ HackerModule, BbcModule, PrismaModule, MusicModule, ClimateModule, NaverModule ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

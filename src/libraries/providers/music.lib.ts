@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 
 @Injectable()
 export class MusicChartProvider {
-  constructor(private prisma: PrismaLibrary) {}
+  constructor(private prisma: PrismaLibrary) { }
 
   async melonMusicChart() {
     try {

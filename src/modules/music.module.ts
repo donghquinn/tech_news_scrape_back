@@ -4,7 +4,7 @@ import { PrismaLibrary } from "libraries/common/prisma.lib";
 import { MusicChartProvider } from "libraries/providers/music.lib";
 
 @Module({
-  controllers: [MusicController],
-  providers: [PrismaLibrary, MusicChartProvider],
+  controllers: [ MusicController ],
+  providers: [ PrismaLibrary, MusicChartProvider ],
 })
-export class MusicModule {}
+export class MusicModule { }

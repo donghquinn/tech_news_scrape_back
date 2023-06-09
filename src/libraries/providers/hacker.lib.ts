@@ -5,7 +5,7 @@ import moment from 'moment-timezone';
 
 @Injectable()
 export class HackersNewsProvider {
-  constructor(private prisma: PrismaLibrary) {}
+  constructor(private prisma: PrismaLibrary) { }
 
   async getHackerNewsCount() {
     try {

@@ -4,7 +4,7 @@ import { PrismaLibrary } from "libraries/common/prisma.lib";
 import { BbcNewsProvider } from "libraries/providers/bbc.lib";
 
 @Module({
-  controllers: [BbcController],
-  providers: [BbcNewsProvider, PrismaLibrary],
+  controllers: [ BbcController ],
+  providers: [ BbcNewsProvider, PrismaLibrary ],
 })
-export class BbcModule {}
+export class BbcModule { }

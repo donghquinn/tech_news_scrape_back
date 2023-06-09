@@ -4,7 +4,7 @@ import { PrismaLibrary } from "libraries/common/prisma.lib";
 import { HackersNewsProvider } from "libraries/providers/hacker.lib";
 
 @Module({
-  controllers: [HackerController],
-  providers: [HackersNewsProvider, PrismaLibrary],
+  controllers: [ HackerController ],
+  providers: [ HackersNewsProvider, PrismaLibrary ],
 })
-export class HackerModule {}
+export class HackerModule { }

@@ -4,7 +4,7 @@ import { PrismaLibrary } from 'libraries/common/prisma.lib';
 import { ClimateProvider } from 'libraries/providers/climate.lib';
 
 @Module({
-  controllers: [ClimateController],
-  providers: [ClimateProvider, PrismaLibrary],
+  controllers: [ ClimateController ],
+  providers: [ ClimateProvider, PrismaLibrary ],
 })
-export class ClimateModule {}
+export class ClimateModule { }

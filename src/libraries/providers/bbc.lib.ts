@@ -5,7 +5,7 @@ import moment from 'moment-timezone';
 
 @Injectable()
 export class BbcNewsProvider {
-  constructor(private prisma: PrismaLibrary) {}
+  constructor(private prisma: PrismaLibrary) { }
 
   async getBbcNewsCount() {
     try {
