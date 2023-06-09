@@ -4,7 +4,7 @@ import { NaverProvider } from 'libraries/providers/naver.lib';
 
 @Controller('naver')
 export class NaverController {
-  constructor(private readonly naver: NaverProvider) {}
+  constructor(private readonly naver: NaverProvider) { }
 
   @Get('/today')
   async getTodayNewsController() {

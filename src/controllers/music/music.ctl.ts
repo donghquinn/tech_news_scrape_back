@@ -4,7 +4,7 @@ import { MusicChartProvider } from 'libraries/providers/music.lib';
 
 @Controller('music')
 export class MusicController {
-  constructor(private readonly melon: MusicChartProvider) {}
+  constructor(private readonly melon: MusicChartProvider) { }
 
   @Get('/today')
   async melonChart() {

@@ -4,7 +4,7 @@ import { ClimateProvider } from 'libraries/providers/climate.lib';
 
 @Controller('climate')
 export class ClimateController {
-  constructor(private readonly climate: ClimateProvider) {}
+  constructor(private readonly climate: ClimateProvider) { }
 
   @Get('today')
   async getClimate() {

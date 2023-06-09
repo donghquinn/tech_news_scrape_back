@@ -4,7 +4,7 @@ import { HackersNewsProvider } from 'libraries/providers/hacker.lib';
 
 @Controller('hacker')
 export class HackerController {
-  constructor(private readonly hacker: HackersNewsProvider) {}
+  constructor(private readonly hacker: HackersNewsProvider) { }
 
   @Get('/count')
   async getHackerCount() {

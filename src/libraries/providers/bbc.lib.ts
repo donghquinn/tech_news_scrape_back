@@ -1,31 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { BbcError } from 'errors/bbc.error';
+import { StatisticsError } from 'errors/statis.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
 import moment from 'moment-timezone';
 
 @Injectable()
 export class BbcNewsProvider {
   constructor(private prisma: PrismaLibrary) { }
-
-  async getBbcNewsCount() {
-    try {
-      const count = await this.prisma.bbcTechNews.count();
-
-      Logger.log('BBC News Total Count: %o', { count });
-
-      return count;
-    } catch (error) {
-      Logger.error('Get BBC Total News Count Error: %o', {
-        error: error instanceof Error ? error : new Error(JSON.stringify(error)),
-      });
-
-      throw new BbcError(
-        'BBC Error',
-        'BBC Total Count Error',
-        error instanceof Error ? error : new Error(JSON.stringify(error)),
-      );
-    }
-  }
 
   async bringTodayBbcNews() {
     try {
@@ -52,6 +33,23 @@ export class BbcNewsProvider {
         'BBC Error',
         'BBC News Error',
         error instanceof Error ? error : new Error(JSON.stringify(error)),
+      );
+    }
+  }
+
+  async getBbcCount() {
+    try {
+      const count = await this.prisma.bbcTechNews.count({ select: { uuid: true } });
+
+      Logger.log(`BBC News Count: ${ count }`);
+
+      return count;
+    } catch (error) {
+      Logger.error('Get BBC Total News Count Error: %o', {
+        error: error instanceof Error ? error : new Error(JSON.stringify(error)),
+      });
+
+      throw new StatisticsError("Statistics", "Get Count Failed", error instanceof Error ? error : new Error(JSON.stringify(error)),
       );
     }
   }

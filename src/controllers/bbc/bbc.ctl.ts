@@ -4,12 +4,12 @@ import { BbcNewsProvider } from 'libraries/providers/bbc.lib';
 
 @Controller('bbc')
 export class BbcController {
-  constructor(private readonly bbc: BbcNewsProvider) {}
+  constructor(private readonly bbc: BbcNewsProvider) { }
 
   @Get('/count')
   async getBbcCount() {
     try {
-      const count = await this.bbc.getBbcNewsCount();
+      const count = await this.bbc.getBbcCount();
 
       return new SetResponse(200, { count });
     } catch (error) {
