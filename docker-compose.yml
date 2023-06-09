@@ -1,0 +1,29 @@
+---
+version: '3.7'
+services:
+  backend:
+    build:
+      context: ./webServer
+      dockerfile: ./Dockerfile
+    container_name: news_miner
+    restart: unless-stopped
+    volumes:
+      - ./webServer/logs:/home/node/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 700M
+        reservations:
+          cpus: '0.15'
+          memory: 300M
+    expose:
+      - 5500
+    env_file:
+      - .env
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
