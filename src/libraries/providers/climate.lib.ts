@@ -26,10 +26,10 @@ export class ClimateProvider {
           khaiGrade: true,
           khaiStatus: true,
           dataTime: true,
-          created: true,
+          founded: true,
         },
         where: {
-          created: {
+          founded: {
             lt: yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
             gte: yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
           },
