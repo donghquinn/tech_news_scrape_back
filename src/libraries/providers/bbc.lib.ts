@@ -41,7 +41,7 @@ export class BbcNewsProvider {
     try {
       const count = await this.prisma.bbcTechNews.count({ select: { uuid: true } });
 
-      Logger.log(`BBC News Count: ${ count }`);
+      Logger.log(`BBC News Count: ${ count.uuid }`);
 
       return count;
     } catch (error) {
