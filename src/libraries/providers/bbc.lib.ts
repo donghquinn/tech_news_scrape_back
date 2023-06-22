@@ -49,7 +49,10 @@ export class BbcNewsProvider {
         error: error instanceof Error ? error : new Error(JSON.stringify(error)),
       });
 
-      throw new StatisticsError("Statistics", "Get Count Failed", error instanceof Error ? error : new Error(JSON.stringify(error)),
+      throw new StatisticsError(
+        "Statistics",
+        "Get Count Failed",
+        error instanceof Error ? error : new Error(JSON.stringify(error)),
       );
     }
   }
