@@ -9,6 +9,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./webServer/logs:/home/node/logs
+      - /etc/localtime:/etc/localtime
     deploy:
       resources:
         limits:

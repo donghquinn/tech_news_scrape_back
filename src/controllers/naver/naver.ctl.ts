@@ -16,4 +16,13 @@ export class NaverController {
       return new SetErrorResponse(500, error);
     }
   }
+
+  // @Get("/kin/count")
+  // async getKinNewsController() {
+  //   try { 
+
+  //   } catch (error) {
+  //     return new SetErrorResponse(500, error);
+  //   }
+  // }
 }
