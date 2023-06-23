@@ -29,14 +29,21 @@ export class HackersNewsProvider {
 
   async bringTodayHackerPosts() {
     try {
-      const yesterday = moment.utc().tz('Asia/Seoul').subtract(1, 'day');
-      Logger.debug("YesterDay: %o", { yesterday });
+      const today = new Date();
+
+      const yesterday = today.setDate(today.getDate() - 1).toString();
+
+      Logger.debug("YesterDay: %o", {
+        yesterday, lt: moment(yesterday).endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+        gt: moment(yesterday).startOf('day').format('YYYY-MM-DD HH:mm:ss')
+      });
+
       const result = await this.prisma.hackers.findMany({
         select: { post: true, link: true, founded: true },
         where: {
           founded: {
-            lt: yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
-            gte: yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            lt: moment(yesterday).endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            gte: moment(yesterday).startOf('day').format('YYYY-MM-DD HH:mm:ss'),
           },
         },
         orderBy: { rank: 'desc' },

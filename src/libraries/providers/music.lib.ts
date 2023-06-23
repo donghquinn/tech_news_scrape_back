@@ -10,14 +10,21 @@ export class MusicChartProvider {
 
   async melonMusicChart() {
     try {
-      const yesterday = moment.tz('Asia/Seoul').subtract(1, 'day');
-      Logger.debug("YesterDay: %o", { yesterday });
+      const today = new Date();
+
+      const yesterday = today.setDate(today.getDate() - 1).toString();
+
+      Logger.debug("YesterDay: %o", {
+        yesterday, lt: moment(yesterday).endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+        gt: moment(yesterday).startOf('day').format('YYYY-MM-DD HH:mm:ss')
+      });
+
       const result = await this.prisma.melon.findMany({
         select: { rank: true, title: true, artist: true, founded: true },
         where: {
           founded: {
-            lt: yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
-            gte: yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            lt: moment(yesterday).endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            gte: moment(yesterday).startOf('day').format('YYYY-MM-DD HH:mm:ss'),
           },
         },
         orderBy: { rank: 'asc' },

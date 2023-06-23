@@ -6,10 +6,10 @@ import WinstonDaily from 'winston-daily-rotate-file';
 
 const fileName = fileURLToPath(import.meta.url);
 const dirName = path.dirname(fileName);
-const dirSaveName = path.join(dirName, '..', '..', 'logs');
+const dirSaveName = path.join(dirName, 'logs');
 
 // 로그 포맷 설정
-const { colorize, combine, timestamp: defaultTimestamp, printf, splat, json } = Winston.format;
+const { combine, timestamp: defaultTimestamp, printf, splat, json } = Winston.format;
 
 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 const formatted = printf(({ level, message, timestamp }) => `${ timestamp } ${ level }: ${ message }`);

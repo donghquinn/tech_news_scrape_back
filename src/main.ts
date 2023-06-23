@@ -35,6 +35,7 @@ export const bootstrap = async () => {
     Logger.log(message);
     Logger.log(wrapper);
 
+
     process.send?.('ready');
   });
 
