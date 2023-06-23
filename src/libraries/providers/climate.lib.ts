@@ -9,13 +9,9 @@ export class ClimateProvider {
 
   async getDailyClimateData() {
     try {
-      const today = new Date();
-      const yesterday = today.setDate(today.getDate() - 1).toString();
+      const yesterday = moment().subtract(1, 'day');
 
-      Logger.debug("YesterDay: %o", {
-        yesterday, lt: moment(yesterday).endOf('day').format('YYYY-MM-DD HH:mm:ss'),
-        gt: moment(yesterday).startOf('day').format('YYYY-MM-DD HH:mm:ss')
-      });
+      Logger.debug("YesterDay: %o", { yesterday });
 
       const result = await this.prisma.climate.findMany({
         select: {
@@ -36,8 +32,8 @@ export class ClimateProvider {
         },
         where: {
           founded: {
-            lt: moment(yesterday).endOf('day').format('YYYY-MM-DD HH:mm:ss'),
-            gte: moment(yesterday).startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            lt: yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            gte: yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
           },
         },
         orderBy: { dataTime: 'desc' },
