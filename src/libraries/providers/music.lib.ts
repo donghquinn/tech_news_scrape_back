@@ -10,8 +10,8 @@ export class MusicChartProvider {
 
   async melonMusicChart() {
     try {
-      const yesterday = moment.utc().tz('Asia/Seoul').subtract(1, 'day');
-
+      const yesterday = moment.tz('Asia/Seoul').subtract(1, 'day');
+      Logger.debug("YesterDay: %o", { yesterday });
       const result = await this.prisma.melon.findMany({
         select: { rank: true, title: true, artist: true, founded: true },
         where: {

@@ -30,7 +30,7 @@ export class HackersNewsProvider {
   async bringTodayHackerPosts() {
     try {
       const yesterday = moment.utc().tz('Asia/Seoul').subtract(1, 'day');
-
+      Logger.debug("YesterDay: %o", { yesterday });
       const result = await this.prisma.hackers.findMany({
         select: { post: true, link: true, founded: true },
         where: {

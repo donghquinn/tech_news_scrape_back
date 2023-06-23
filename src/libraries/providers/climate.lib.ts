@@ -9,8 +9,8 @@ export class ClimateProvider {
 
   async getDailyClimateData() {
     try {
-      const yesterday = moment.utc().tz('Asia/Seoul').subtract(1, 'day');
-
+      const yesterday = moment.tz('Asia/Seoul').subtract(1, 'day');
+      Logger.debug("YesterDay: %o", { yesterday });
       const result = await this.prisma.climate.findMany({
         select: {
           pm10Value: true,

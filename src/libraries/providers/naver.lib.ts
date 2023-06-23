@@ -10,7 +10,7 @@ export class NaverProvider {
   async getNaverNews() {
     try {
       const yesterday = moment.utc().tz('Asia/Seoul').subtract(1, 'day');
-
+      Logger.debug("YesterDay: %o", { yesterday });
       const result = await this.prisma.naverNews.findMany({
         select: {
           keyWord: true,

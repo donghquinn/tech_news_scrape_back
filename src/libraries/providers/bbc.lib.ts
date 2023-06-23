@@ -10,8 +10,8 @@ export class BbcNewsProvider {
 
   async bringTodayBbcNews() {
     try {
-      const yesterday = moment.utc().tz('Asia/Seoul').subtract(1, 'day');
-
+      const yesterday = moment.tz('Asia/Seoul').subtract(1, 'day');
+      Logger.debug("YesterDay: %o", { yesterday });
       // Logger.debug('Today: %o', { date });
 
       const result = await this.prisma.bbcTechNews.findMany({
