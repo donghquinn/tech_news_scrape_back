@@ -37,8 +37,8 @@ export class HackersNewsProvider {
         select: { post: true, link: true, founded: true },
         where: {
           founded: {
-            lt: moment(yesterday).endOf('day').format('YYYY-MM-DD HH:mm:ss'),
-            gte: moment(yesterday).startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
+            gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
           },
         },
         orderBy: { rank: 'desc' },

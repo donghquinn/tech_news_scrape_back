@@ -24,8 +24,8 @@ export class NaverProvider {
         },
         where: {
           founded: {
-            lt: yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss'),
-            gte: yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
+            gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
           },
         },
         orderBy: { founded: 'desc' },
