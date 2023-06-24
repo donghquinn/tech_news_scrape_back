@@ -32,7 +32,6 @@ export const bootstrap = async () => {
 
     Logger.log(wrapper);
     Logger.log(`Scrape Manager Start: ${ date }`);
-    Logger.log(`Listening on Port ${ port }`);
     Logger.log(message);
     Logger.log(wrapper);
 

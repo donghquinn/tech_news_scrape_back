@@ -8,6 +8,7 @@ export class HeadersMiddleware implements NestMiddleware {
   async use(request: Request, response: Response, next: NextFunction) {
     try {
       const authKey = request.headers?.key;
+
       Logger.debug(request.ip);
 
       if (authKey === process.env.AUTH_KEY!) {

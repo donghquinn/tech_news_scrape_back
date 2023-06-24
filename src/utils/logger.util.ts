@@ -6,7 +6,7 @@ import WinstonDaily from 'winston-daily-rotate-file';
 
 const fileName = fileURLToPath(import.meta.url);
 const dirName = path.dirname(fileName);
-const dirSaveName = path.join(dirName, 'logs');
+const dirSaveName = path.join(dirName, '..', '..', 'logs');
 
 // 로그 포맷 설정
 const { combine, timestamp: defaultTimestamp, printf, splat, json } = Winston.format;

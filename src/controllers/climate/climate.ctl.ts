@@ -6,7 +6,7 @@ import { ClimateProvider } from 'libraries/providers/climate.lib';
 export class ClimateController {
   constructor(private readonly climate: ClimateProvider) { }
 
-  @Get('today')
+  @Get('/today')
   async getClimate() {
     try {
       const result = await this.climate.getDailyClimateData();
