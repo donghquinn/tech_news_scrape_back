@@ -22,6 +22,7 @@ export class NaverProvider {
           postedTime: true,
           founded: true,
         },
+        
         where: {
           founded: {
             lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),

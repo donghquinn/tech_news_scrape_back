@@ -2,6 +2,7 @@ import { Logger } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from 'app.module';
 import helmet from 'helmet';
+import { shutdown } from 'utils/shutdown.utils';
 
 export const bootstrap = async () => {
   const { NestFactory } = await import('@nestjs/core');
@@ -9,8 +10,6 @@ export const bootstrap = async () => {
   const { config } = await import('dotenv');
 
   config();
-
-  // source.install();
 
   const date = new Date().toLocaleTimeString();
 
@@ -39,7 +38,7 @@ export const bootstrap = async () => {
     process.send?.('ready');
   });
 
-  // process.on('SIGTERM', () => shutdown(app));
+  process.on('SIGTERM', () => shutdown(app));
 
 };
 
