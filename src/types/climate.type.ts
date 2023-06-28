@@ -1,16 +1,3 @@
-export interface Response {
-  response: BodyResponse;
-}
-
-interface BodyResponse {
-  body: ClimateResponse;
-}
-
-export interface ClimateResponse {
-  total: string;
-  items: Array<ClimateItems>;
-}
-
 export interface ClimateItems {
   so2Grade: string;
   coFlag: string | null;

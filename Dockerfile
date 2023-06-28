@@ -13,7 +13,6 @@ WORKDIR /home/node
 # copy package.json, package-lock.json into image
 COPY yarn.lock ./
 
-
 # --- release ---
 FROM base AS release
 

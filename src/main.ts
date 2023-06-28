@@ -17,7 +17,7 @@ export const bootstrap = async () => {
     logger: [ 'log', 'debug', 'warn', 'error' ],
   });
 
-  const port = Number(process.env.APP_PORT!);
+  const port = Number(process.env.APP_PORT);
 
   app.use(helmet());
   app.enableCors();
