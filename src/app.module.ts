@@ -7,9 +7,10 @@ import { HackerModule } from './modules/hacker.module';
 import { MusicModule } from './modules/music.module';
 import { NaverModule } from './modules/naver.module';
 import { PrismaModule } from './modules/prisma.module';
+import { ListModule } from 'modules/list.module';
 
 @Module({
-  imports: [ HackerModule, BbcModule, PrismaModule, MusicModule, ClimateModule, NaverModule ],
+  imports: [ HackerModule, BbcModule, PrismaModule, MusicModule, ClimateModule, NaverModule, ListModule ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
