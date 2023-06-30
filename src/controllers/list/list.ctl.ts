@@ -1,17 +1,32 @@
-import { Controller, Post } from "@nestjs/common";
+import { Controller, Get, Post } from "@nestjs/common";
 import { SetErrorResponse, SetResponse } from "dto/response.dto";
 import { GetList } from "libraries/providers/list.lib";
+import { ListRequest } from "types/list.type";
+import { listRequestValidator } from "validators/list.validator";
 
 @Controller("list")
 export class ScrapedList {
     constructor(private readonly list: GetList) { }
     
-    @Post("/get")
+    @Get("/get")
     async getListController() {
         try {
             const dateList = await this.list.getDateList();
 
             return new SetResponse(200, { dateList });
+        } catch (error) {
+            return new SetErrorResponse(500, { error });
+        }
+    }
+
+    @Post("/data")
+    async getMatchingData(request: ListRequest) {
+        try {
+            const { date } = await listRequestValidator(request);
+            
+            const result = await this.list.getMatchingData(date);
+
+            return new SetResponse(200, { result });
         } catch (error) {
             return new SetErrorResponse(500, { error });
         }
