@@ -8,7 +8,7 @@ export class GetList {
     
     async getDateList() {
         try {
-            const dateLists = await this.prisma.bbcTechNews.findMany({ select: { founded: true } });
+            const dateLists = await this.prisma.bbcTechNews.findUnique({select: {founded: true}, where: {writer: "donghquinn"}})
 
             Logger.debug("Date List: %o", { dateLists });
 
