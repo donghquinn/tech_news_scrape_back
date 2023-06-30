@@ -20,6 +20,8 @@ export class GetList {
 
     async getMatchingData(date: string) {
         try {
+            Logger.log("Get Matching Data: %o", { date });
+            
             const naverData = await this.prisma.naverNews.findMany({ where: { founded: date } });
             const bbcData = await this.prisma.bbcTechNews.findMany({ where: { founded: date } });
             const melonData = await this.prisma.melon.findMany({ where: { founded: date } });
