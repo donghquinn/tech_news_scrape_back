@@ -9,8 +9,16 @@ export class GetList {
     async getDateList() {
         try {
             const dateLists = await this.prisma.bbcTechNews.findUniqueOrThrow(
-                { select: { founded: true }, where: { writer: "donghquinn" } 
-            });
+                { 
+                    select: { 
+                        founded: true 
+                    }, 
+
+                    where: { 
+                        writer: "donghquinn" 
+                    } 
+                }
+            );
 
             Logger.debug("Date List: %o", { dateLists: dateLists?.founded });
 
