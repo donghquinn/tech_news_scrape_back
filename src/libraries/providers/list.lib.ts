@@ -8,13 +8,19 @@ export class GetList {
     
     async getDateList() {
         try {
-            const dateLists = await this.prisma.bbcTechNews.findUniqueOrThrow({ select: { founded: true }, where: { writer: "donghquinn" } });
+            const dateLists = await this.prisma.bbcTechNews.findUniqueOrThrow(
+                { select: { founded: true }, where: { writer: "donghquinn" } 
+            });
 
             Logger.debug("Date List: %o", { dateLists: dateLists?.founded });
 
             return dateLists?.founded;
         } catch (error) {
-            throw new ListError("Get Date List", "Failed To Get List", error instanceof Error ? error : new Error(JSON.stringify(error)));
+            throw new ListError(
+                "Get Date List", 
+                "Failed To Get List", 
+                error instanceof Error ? error : new Error(JSON.stringify(error))
+                );
         }
     }
 
@@ -36,7 +42,11 @@ export class GetList {
                 hackerData,
             }
         } catch (error) {
-            throw new ListError("Get Matching Data", "Failed to Get Matching List", error instanceof Error ? error : new Error(JSON.stringify(error)));
+            throw new ListError(
+                "Get Matching Data", 
+                "Failed to Get Matching List", 
+                error instanceof Error ? error : new Error(JSON.stringify(error))
+                );
         }
     }
 }
