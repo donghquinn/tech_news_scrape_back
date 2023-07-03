@@ -8,7 +8,7 @@ import fetch from 'node-fetch';
 export class MusicChartProvider {
   constructor(private prisma: PrismaLibrary) { }
 
-  async melonMusicChart() {
+  async melonMusicChart(today: string) {
     try {
       const yesterday = moment().subtract(1, 'day');
 

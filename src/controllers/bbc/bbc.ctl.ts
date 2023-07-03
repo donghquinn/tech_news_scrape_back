@@ -1,6 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { BbcNewsProvider } from 'libraries/providers/bbc.lib';
+import { MatchingDataRequest } from 'types/list.type';
+import { listValidator } from 'validators/list.validator';
 
 @Controller('bbc')
 export class BbcController {
@@ -18,9 +20,11 @@ export class BbcController {
   }
 
   @Get('/news')
-  async getBbcNews() {
+  async getBbcNews(@Body() request: MatchingDataRequest) {
     try {
-      const news = await this.bbc.bringTodayBbcNews();
+      const {today } = await listValidator(request);
+
+      const news = await this.bbc.bringTodayBbcNews(today);
 
       return new SetResponse(200, { news });
     } catch (error) {

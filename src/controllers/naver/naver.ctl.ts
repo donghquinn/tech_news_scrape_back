@@ -1,15 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { NaverProvider } from 'libraries/providers/naver.lib';
+import { MatchingDataRequest } from 'types/list.type';
+import { listValidator } from 'validators/list.validator';
 
 @Controller('naver')
 export class NaverController {
   constructor(private readonly naver: NaverProvider) { }
 
   @Get('/today')
-  async getTodayNewsController() {
+  async getTodayNewsController(@Body() request: MatchingDataRequest) {
     try {
-      const result = await this.naver.getNaverNews();
+      const {today} = await listValidator(request);
+
+      const result = await this.naver.getNaverNews(today);
 
       return new SetResponse(200, { result });
     } catch (error) {

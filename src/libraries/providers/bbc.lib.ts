@@ -8,7 +8,7 @@ import moment from 'moment-timezone';
 export class BbcNewsProvider {
   constructor(private prisma: PrismaLibrary) { }
 
-  async bringTodayBbcNews() {
+  async bringTodayBbcNews(today: string) {
     try {
       const yesterday = moment().subtract(1, 'day');
       Logger.debug("YesterDay: %o", { yesterday });

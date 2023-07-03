@@ -7,7 +7,7 @@ import moment from 'moment-timezone';
 export class NaverProvider {
   constructor(private prisma: PrismaLibrary) { }
 
-  async getNaverNews() {
+  async getNaverNews(today: string) {
     try {
       const yesterday = moment().subtract(1, 'day');
 
