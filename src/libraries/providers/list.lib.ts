@@ -8,21 +8,18 @@ export class GetList {
     
     async getDateList() {
         try {
-            const dateLists = await this.prisma.bbcTechNews.findUniqueOrThrow(
+            const dateLists = await this.prisma.bbcTechNews.findMany(
                 { 
                     select: { 
-                        founded: true 
+                        founded: true,
                     }, 
-
-                    where: { 
-                        writer: "donghquinn" 
-                    } 
+                    distinct: ["founded"]
                 }
             );
 
-            Logger.debug("Date List: %o", { dateLists: dateLists?.founded });
+            Logger.debug("Date List: %o", { dateLists });
 
-            return dateLists?.founded;
+            return dateLists;
         } catch (error) {
             throw new ListError(
                 "Get Date List", 
