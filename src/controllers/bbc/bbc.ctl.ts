@@ -1,4 +1,4 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { BbcNewsProvider } from 'libraries/providers/bbc.lib';
 import { MatchingDataRequest } from 'types/list.type';
@@ -19,7 +19,7 @@ export class BbcController {
     }
   }
 
-  @Get('/news')
+  @Post('/news')
   async getBbcNews(@Body() request: MatchingDataRequest) {
     try {
       const {today } = await listValidator(request);
