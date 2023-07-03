@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { HackerError } from 'errors/hacker.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
-import moment from 'moment-timezone';
 
 @Injectable()
 export class HackersNewsProvider {
@@ -27,19 +26,20 @@ export class HackersNewsProvider {
     }
   }
 
-  async bringTodayHackerPosts() {
+  async bringTodayHackerPosts(today: string) {
     try {
-      const yesterday = moment().tz('Asia/Seoul').subtract(1, 'day');
+      // const yesterday = moment().tz('Asia/Seoul').subtract(1, 'day');
 
-      Logger.debug("YesterDay: %o", { yesterday });
+      // Logger.debug("YesterDay: %o", { yesterday });
 
       const result = await this.prisma.hackers.findMany({
         select: { post: true, link: true, founded: true },
         where: {
-          founded: {
-            lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
-            gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
-          },
+          founded: today
+          // founded: {
+          //   lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
+          //   gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
+          // },
         },
         orderBy: { rank: 'desc' },
       });

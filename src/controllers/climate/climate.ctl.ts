@@ -1,15 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { ClimateProvider } from 'libraries/providers/climate.lib';
+import { MatchingDataRequest } from 'types/list.type';
+import { listValidator } from 'validators/list.validator';
 
 @Controller('climate')
 export class ClimateController {
   constructor(private readonly climate: ClimateProvider) { }
 
-  @Get('/today')
-  async getClimate() {
+  @Post('/today')
+  async getClimate(request: MatchingDataRequest) {
     try {
-      const result = await this.climate.getDailyClimateData();
+      const {today} = await listValidator(request);
+
+      const result = await this.climate.getDailyClimateData(today);
 
       return new SetResponse(200, { result });
     } catch (error) {

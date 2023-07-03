@@ -1,17 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ClimateError } from 'errors/climate.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
-import moment from 'moment-timezone';
 
 @Injectable()
 export class ClimateProvider {
   constructor(private prisma: PrismaLibrary) { }
 
-  async getDailyClimateData() {
+  async getDailyClimateData(today: string) {
     try {
-      const yesterday = moment().subtract(1, 'day');
+      // const yesterday = moment().subtract(1, 'day');
 
-      Logger.debug("YesterDay: %o", { yesterday });
+      // Logger.debug("YesterDay: %o", { yesterday });
 
       const result = await this.prisma.climate.findMany({
         select: {
@@ -31,10 +30,11 @@ export class ClimateProvider {
           founded: true,
         },
         where: {
-          founded: {
-            lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
-            gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
-          },
+          founded: today
+          // founded: {
+          //   lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
+          //   gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
+          // },
         },
         orderBy: { dataTime: 'desc' },
       });
