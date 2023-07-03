@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { NaverError } from 'errors/naver.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
-import moment from 'moment-timezone';
 
 @Injectable()
 export class NaverProvider {
@@ -9,9 +8,9 @@ export class NaverProvider {
 
   async getNaverNews(today: string) {
     try {
-      const yesterday = moment().subtract(1, 'day');
+      // const yesterday = moment().subtract(1, 'day');
 
-      Logger.debug("YesterDay: %o", { yesterday });
+      Logger.debug("YesterDay: %o", { today: new Date(today) });
 
       const result = await this.prisma.naverNews.findMany({
         select: {
@@ -24,10 +23,7 @@ export class NaverProvider {
         },
         
         where: {
-          founded: {
-            lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
-            gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
-          },
+          founded: new Date(today)
         },
         orderBy: { founded: 'desc' },
       });

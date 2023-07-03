@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { MelonError } from 'errors/melon.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
-import moment from 'moment-timezone';
 import fetch from 'node-fetch';
 
 @Injectable()
@@ -10,17 +9,14 @@ export class MusicChartProvider {
 
   async melonMusicChart(today: string) {
     try {
-      const yesterday = moment().subtract(1, 'day');
+      // const yesterday = moment().subtract(1, 'day');
 
-      Logger.debug("YesterDay: %o", { yesterday });
+      Logger.debug("YesterDay: %o", { today: new Date(today) });
 
       const result = await this.prisma.melon.findMany({
         select: { rank: true, title: true, artist: true, founded: true },
         where: {
-          founded: {
-            lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
-            gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
-          },
+          founded: new Date(today)
         },
         orderBy: { rank: 'asc' },
       });

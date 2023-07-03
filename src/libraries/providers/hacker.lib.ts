@@ -30,12 +30,12 @@ export class HackersNewsProvider {
     try {
       // const yesterday = moment().tz('Asia/Seoul').subtract(1, 'day');
 
-      // Logger.debug("YesterDay: %o", { yesterday });
+      Logger.debug("YesterDay: %o", { today: new Date(today)});
 
       const result = await this.prisma.hackers.findMany({
         select: { post: true, link: true, founded: true },
         where: {
-          founded: today
+          founded: new Date(today)
           // founded: {
           //   lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
           //   gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
@@ -46,9 +46,7 @@ export class HackersNewsProvider {
 
       return result;
     } catch (error) {
-      Logger.error('Bring Hacker News Error: %o', {
-        error: error instanceof Error ? error : new Error(JSON.stringify(error)),
-      });
+      Logger.error('Bring Hacker News Error: %o', error instanceof Error ? error : new Error(JSON.stringify(error)));
 
       throw new HackerError(
         'Hacker News',

@@ -10,7 +10,7 @@ export class ClimateProvider {
     try {
       // const yesterday = moment().subtract(1, 'day');
 
-      // Logger.debug("YesterDay: %o", { yesterday });
+      Logger.debug("YesterDay: %o", { today: new Date(today)});
 
       const result = await this.prisma.climate.findMany({
         select: {
@@ -30,7 +30,7 @@ export class ClimateProvider {
           founded: true,
         },
         where: {
-          founded: today
+          founded: new Date(today)
           // founded: {
           //   lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
           //   gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))

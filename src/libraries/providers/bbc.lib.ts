@@ -12,16 +12,13 @@ export class BbcNewsProvider {
     try {
       const yesterday = moment().subtract(1, 'day');
       Logger.debug("YesterDay: %o", { yesterday });
-      // Logger.debug('Today: %o', { date });
+      Logger.debug('Today: %o', { today: new Date(today) });
 
       const result = await this.prisma.bbcTechNews.findMany({
         select: { post: true, link: true, founded: true },
         orderBy: { rank: 'desc' },
         where: {
-          founded: {
-            lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
-            gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
-          },
+            founded: new Date(today)
         },
       });
 
