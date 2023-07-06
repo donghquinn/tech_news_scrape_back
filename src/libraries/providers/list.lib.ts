@@ -35,14 +35,12 @@ export class GetList {
             
             const naverData = await this.prisma.naverNews.findMany({ where: { founded: date } });
             const bbcData = await this.prisma.bbcTechNews.findMany({ where: { founded: date } });
-            const melonData = await this.prisma.melon.findMany({ where: { founded: date } });
             const climateData = await this.prisma.climate.findMany({ where: { founded: date } });
             const hackerData = await this.prisma.hackers.findMany({ where: { founded: date } });
 
             return {
                 naverData,
                 bbcData,
-                melonData, 
                 climateData, 
                 hackerData,
             }
