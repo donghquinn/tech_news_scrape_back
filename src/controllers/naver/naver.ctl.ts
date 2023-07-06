@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { NaverProvider } from 'libraries/providers/naver.lib';
 import { MatchingDataRequest } from 'types/list.type';
@@ -12,7 +12,7 @@ export class NaverController {
   async getTodayNewsController(@Body() request: MatchingDataRequest) {
     try {
       const {today} = await listValidator(request);
-
+      Logger.log(today);
       const result = await this.naver.getNaverNews(today);
 
       return new SetResponse(200, { result });

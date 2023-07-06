@@ -1,8 +1,9 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { ClimateProvider } from 'libraries/providers/climate.lib';
 import { MatchingDataRequest } from 'types/list.type';
 import { listValidator } from 'validators/list.validator';
+
 
 @Controller('climate')
 export class ClimateController {
@@ -12,7 +13,7 @@ export class ClimateController {
   async getClimate(@Body() request: MatchingDataRequest) {
     try {
       const {today} = await listValidator(request);
-
+      Logger.log(today);
       const result = await this.climate.getDailyClimateData(today);
 
       return new SetResponse(200, { result });
