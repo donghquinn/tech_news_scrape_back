@@ -2,7 +2,7 @@ import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { HackersNewsProvider } from 'libraries/providers/hacker.lib';
 import { MatchingDataRequest } from 'types/list.type';
-import { listValidator } from 'validators/list.validator';
+import { dataRequestValidator } from 'validators/list.validator';
 
 @Controller('hacker')
 export class HackerController {
@@ -22,7 +22,7 @@ export class HackerController {
   @Post('/news')
   async getHackerNews(@Body() request: MatchingDataRequest) {
     try {
-      const {today} = await listValidator(request);
+      const {today} = await dataRequestValidator(request);
       Logger.log(today);
       const news = await this.hacker.bringTodayHackerPosts(today);
 

@@ -2,7 +2,7 @@ import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { SetErrorResponse, SetResponse } from 'dto/response.dto';
 import { NaverProvider } from 'libraries/providers/naver.lib';
 import { MatchingDataRequest } from 'types/list.type';
-import { listValidator } from 'validators/list.validator';
+import { dataRequestValidator } from 'validators/list.validator';
 
 @Controller('naver')
 export class NaverController {
@@ -11,7 +11,7 @@ export class NaverController {
   @Post('/today')
   async getTodayNewsController(@Body() request: MatchingDataRequest) {
     try {
-      const {today} = await listValidator(request);
+      const {today} = await dataRequestValidator(request);
       Logger.log(today);
       const result = await this.naver.getNaverNews(today);
 

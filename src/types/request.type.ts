@@ -1,3 +1,4 @@
 export interface ScrapeRequest {
-    target: string;
+    today: string;
 }
+
