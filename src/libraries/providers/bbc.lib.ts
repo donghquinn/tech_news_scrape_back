@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { endOfDay, startOfDay } from 'date-fns';
 import { BbcError } from 'errors/bbc.error';
 import { StatisticsError } from 'errors/statis.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
@@ -18,7 +19,10 @@ export class BbcNewsProvider {
         select: { post: true, link: true, founded: true },
         orderBy: { rank: 'desc' },
         where: {
-            founded: new Date(today)
+          founded: {
+            lt: startOfDay(new Date(today)),
+            gte: endOfDay(new Date(today))
+          },
         },
       });
 

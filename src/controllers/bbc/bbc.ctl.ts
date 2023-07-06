@@ -22,7 +22,7 @@ export class BbcController {
   @Post('/news')
   async getBbcNews(@Body() request: MatchingDataRequest) {
     try {
-      const {today } = await listValidator(request);
+      const { today } = await listValidator(request);
 
       const news = await this.bbc.bringTodayBbcNews(today);
 
