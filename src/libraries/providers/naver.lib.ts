@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { endOfDay, startOfDay } from 'date-fns';
 import { NaverError } from 'errors/naver.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
 
@@ -23,7 +24,10 @@ export class NaverProvider {
         },
         
         where: {
-          founded: new Date(today)
+          founded: {
+            lt: startOfDay(new Date(today)),
+            gte: endOfDay(new Date(today))
+          },
         },
         orderBy: { founded: 'desc' },
       });

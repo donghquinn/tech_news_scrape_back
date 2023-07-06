@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { HackerError } from 'errors/hacker.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
+import { endOfDay, startOfDay } from 'date-fns';
 
 @Injectable()
 export class HackersNewsProvider {
@@ -35,11 +36,11 @@ export class HackersNewsProvider {
       const result = await this.prisma.hackers.findMany({
         select: { post: true, link: true, founded: true },
         where: {
-          founded: new Date(today)
-          // founded: {
-          //   lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
-          //   gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
-          // },
+          // founded: new Date(today)
+          founded: {
+            lt: startOfDay(new Date(today)),
+            gte: endOfDay(new Date(today))
+          },
         },
         orderBy: { rank: 'desc' },
       });

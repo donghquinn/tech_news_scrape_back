@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { endOfDay, startOfDay } from 'date-fns';
 import { ClimateError } from 'errors/climate.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
 
@@ -30,11 +31,10 @@ export class ClimateProvider {
           founded: true,
         },
         where: {
-          founded: new Date(today)
-          // founded: {
-          //   lt: new Date(yesterday.endOf('day').format('YYYY-MM-DD HH:mm:ss')),
-          //   gte: new Date(yesterday.startOf('day').format('YYYY-MM-DD HH:mm:ss'))
-          // },
+          founded: {
+            lt: startOfDay(new Date(today)),
+            gte: endOfDay(new Date(today))
+          },
         },
         orderBy: { dataTime: 'desc' },
       });
