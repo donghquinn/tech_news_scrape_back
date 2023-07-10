@@ -11,7 +11,7 @@ export const listRequestValidator = async (request: ListRequest) => {
 
         return validated;
     } catch (error) {
-        Logger.error("error: %o", {error});
+        Logger.error(error);
 
         throw new ValidatorError("List Request Validator", "Validation Error")
     }
@@ -25,7 +25,7 @@ export const dataRequestValidator = async (request: MatchingDataRequest) => {
 
         return validated;
     } catch (error) {
-        Logger.error("error: %o", {error});
+        Logger.error(error);
 
         throw new ValidatorError("List Request Validator", "Validation Error")
     }
@@ -39,8 +39,8 @@ export const listValidator = async(request: MatchingDataRequest) => {
 
         return validated;
     } catch (error) {
-        Logger.error("error: %o", {error});
-        
+        Logger.error(error);
+
         throw new ValidatorError("List Request Validator", "Validation Error")
     }
 }
