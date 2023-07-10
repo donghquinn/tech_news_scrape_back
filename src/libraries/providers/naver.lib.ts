@@ -28,8 +28,8 @@ export class NaverProvider {
         },
         where: {
           founded: {
-            lt: startOfDay(new Date(today)),
-            gte: endOfDay(new Date(today))
+            gte: startOfDay(new Date(today)),
+            lte: endOfDay(new Date(today))
           },
         },
         orderBy: { founded: 'desc' },

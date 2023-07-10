@@ -16,7 +16,7 @@ export class ClimateProvider {
         start: startOfDay(new Date(yesterday)),
         end: endOfDay(new Date(yesterday)),
       });
-      
+
       const result = await this.prisma.climate.findMany({
         select: {
           pm10Value: true,
@@ -36,8 +36,8 @@ export class ClimateProvider {
         },
         where: {
           founded: {
-            lt: startOfDay(new Date(yesterday)),
-            gte: endOfDay(new Date(yesterday))
+            gte: startOfDay(new Date(today)),
+            lte: endOfDay(new Date(today))
           },
         },
         orderBy: { dataTime: 'desc' },

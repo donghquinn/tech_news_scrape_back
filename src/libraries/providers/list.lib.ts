@@ -43,8 +43,8 @@ export class GetList {
             
             const naverData = await this.prisma.naverNews.findMany({ where: 
                 { founded: {
-                    lt: startOfDay(new Date(date)),
-                    gte: endOfDay(new Date(date))
+                    gte: startOfDay(new Date(date)),
+                    lte: endOfDay(new Date(date))
                 } } 
             });
             const bbcData = await this.prisma.bbcTechNews.findMany({ where: { founded: date } });

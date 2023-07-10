@@ -41,8 +41,8 @@ export class HackersNewsProvider {
         select: { post: true, link: true, founded: true },
         where: {
           founded: {
-            lt: startOfDay(new Date(yesterday)),
-            gte: endOfDay(new Date(yesterday))
+            gte: startOfDay(new Date(today)),
+            lte: endOfDay(new Date(today))
           },
         },
         orderBy: { rank: 'desc' },
