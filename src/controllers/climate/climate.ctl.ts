@@ -15,12 +15,12 @@ export class ClimateController {
       const { today } = await dataRequestValidator(request);
 
       Logger.log(today);
-      
+
       const result = await this.climate.getDailyClimateData(today);
 
       return new SetResponse(200, { result });
     } catch (error) {
-      return new SetErrorResponse(500, error);
+      return new SetErrorResponse(500, {error});
     }
   }
 }

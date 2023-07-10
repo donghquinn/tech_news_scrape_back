@@ -15,7 +15,7 @@ export class HackerController {
 
       return new SetResponse(200, { count });
     } catch (error) {
-      return new SetErrorResponse(500, error);
+      return new SetErrorResponse(500, {error});
     }
   }
 
@@ -30,7 +30,7 @@ export class HackerController {
 
       return new SetResponse(200, { result });
     } catch (error) {
-      return new SetErrorResponse(500, error);
+      return new SetErrorResponse(500, {error});
     }
   }
 }
