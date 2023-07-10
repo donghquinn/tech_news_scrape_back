@@ -12,7 +12,9 @@ export class NaverController {
   async getTodayNewsController(@Body() request: MatchingDataRequest) {
     try {
       const {today} = await dataRequestValidator(request);
+      
       Logger.log(today);
+
       const result = await this.naver.getNaverNews(today);
 
       return new SetResponse(200, { result });

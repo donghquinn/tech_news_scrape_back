@@ -23,10 +23,12 @@ export class HackerController {
   async getHackerNews(@Body() request: MatchingDataRequest) {
     try {
       const {today} = await dataRequestValidator(request);
-      Logger.log(today);
-      const news = await this.hacker.bringTodayHackerPosts(today);
 
-      return new SetResponse(200, { news });
+      Logger.log(today);
+
+      const result = await this.hacker.bringTodayHackerPosts(today);
+
+      return new SetResponse(200, { result });
     } catch (error) {
       return new SetErrorResponse(500, error);
     }

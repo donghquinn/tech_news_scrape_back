@@ -24,9 +24,9 @@ export class BbcController {
     try {
       const { today } = await dataRequestValidator(request);
       Logger.log(today);
-      const news = await this.bbc.bringTodayBbcNews(today);
+      const result = await this.bbc.bringTodayBbcNews(today);
 
-      return new SetResponse(200, { news });
+      return new SetResponse(200, { result });
     } catch (error) {
       return new SetErrorResponse(500, error);
     }
