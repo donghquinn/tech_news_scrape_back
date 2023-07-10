@@ -16,8 +16,8 @@ export class BbcNewsProvider {
       Logger.debug("YesterDay: %o", { yesterday });
 
       Logger.debug("YesterDay: %o", { 
-        start: startOfDay(new Date(yesterday)).toString(),
-        end: endOfDay(new Date(yesterday)).toString(),
+        start: startOfDay(new Date(yesterday)),
+        end: endOfDay(new Date(yesterday)),
       });
 
       const result = await this.prisma.bbcTechNews.findMany({

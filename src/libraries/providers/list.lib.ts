@@ -37,8 +37,8 @@ export class GetList {
             // const yesterday = moment(today).subtract(1, 'day').toString();
 
             Logger.debug("YesterDay: %o", { 
-              start: startOfDay(new Date(date)).toString(),
-              end: endOfDay(new Date(date)).toString(),
+              start: startOfDay(new Date(date)),
+              end: endOfDay(new Date(date)),
             });
             
             const naverData = await this.prisma.naverNews.findMany({ where: 

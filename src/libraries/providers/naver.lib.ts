@@ -13,10 +13,10 @@ export class NaverProvider {
       const yesterday = moment(today).subtract(1, 'day').toString();
 
       Logger.debug("YesterDay: %o", { 
-        start: startOfDay(new Date(yesterday)).toString(),
-        end: endOfDay(new Date(yesterday)).toString(),
+        start: startOfDay(new Date(yesterday)),
+        end: endOfDay(new Date(yesterday)),
       });
-      
+
       const result = await this.prisma.naverNews.findMany({
         select: {
           keyWord: true,
