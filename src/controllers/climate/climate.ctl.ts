@@ -12,7 +12,7 @@ export class ClimateController {
   @Post('/today')
   async getClimate(@Body() request: MatchingDataRequest) {
     try {
-      const {today} = await dataRequestValidator(request);
+      const { today } = await dataRequestValidator(request);
       Logger.log(today);
       const result = await this.climate.getDailyClimateData(today);
 

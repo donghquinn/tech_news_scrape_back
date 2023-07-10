@@ -12,6 +12,8 @@ export class HeadersMiddleware implements NestMiddleware {
       Logger.debug(request.ip);
 
       if (authKey === process.env.AUTH_KEY) {
+        Logger.debug("Auth Key Detected");
+
         next();
       } else {
         return new SetErrorResponse(500, { response: 'No Auth Key Detected' });

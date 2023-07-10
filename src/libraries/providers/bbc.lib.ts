@@ -12,6 +12,7 @@ export class BbcNewsProvider {
   async bringTodayBbcNews(today: string) {
     try {
       const yesterday = moment().subtract(1, 'day');
+      
       Logger.debug("YesterDay: %o", { yesterday });
       Logger.debug('Today: %o', { today: new Date(today) });
 
