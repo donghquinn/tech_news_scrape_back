@@ -22,7 +22,6 @@ export class NaverProvider {
           postedTime: true,
           founded: true,
         },
-        
         where: {
           founded: {
             lt: startOfDay(new Date(today)),
