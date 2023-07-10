@@ -11,10 +11,14 @@ export class BbcNewsProvider {
 
   async bringTodayBbcNews(today: string) {
     try {
-      const yesterday = moment().subtract(1, 'day');
+      const yesterday = moment(today).subtract(1, 'day').toString();
       
       Logger.debug("YesterDay: %o", { yesterday });
-      Logger.debug('Today: %o', { today: new Date(today) });
+
+      Logger.debug("YesterDay: %o", { 
+        start: startOfDay(new Date(yesterday)).toString(),
+        end: endOfDay(new Date(yesterday)).toString(),
+      });
 
       const result = await this.prisma.bbcTechNews.findMany({
         select: { post: true, link: true, founded: true },

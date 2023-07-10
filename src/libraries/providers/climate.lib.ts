@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { endOfDay, startOfDay } from 'date-fns';
 import { ClimateError } from 'errors/climate.error';
 import { PrismaLibrary } from 'libraries/common/prisma.lib';
+import moment from 'moment-timezone';
 
 @Injectable()
 export class ClimateProvider {
@@ -9,9 +10,12 @@ export class ClimateProvider {
 
   async getDailyClimateData(today: string) {
     try {
-      // const yesterday = moment().subtract(1, 'day');
+      const yesterday = moment(today).subtract(1, 'day').toString();
 
-      Logger.debug("YesterDay: %o", { today: new Date(today)});
+      Logger.debug("YesterDay: %o", { 
+        start: startOfDay(new Date(yesterday)).toString(),
+        end: endOfDay(new Date(yesterday)).toString(),
+      });
 
       const result = await this.prisma.climate.findMany({
         select: {
@@ -32,8 +36,8 @@ export class ClimateProvider {
         },
         where: {
           founded: {
-            lt: startOfDay(new Date(today)),
-            gte: endOfDay(new Date(today))
+            lt: startOfDay(new Date(yesterday)),
+            gte: endOfDay(new Date(yesterday))
           },
         },
         orderBy: { dataTime: 'desc' },
