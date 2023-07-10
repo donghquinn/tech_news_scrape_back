@@ -25,8 +25,8 @@ export class BbcNewsProvider {
         orderBy: { rank: 'desc' },
         where: {
           founded: {
-            gte: startOfDay(new Date(today)),
-            lte: endOfDay(new Date(today))
+            gte: startOfDay(new Date(yesterday)),
+            lte: endOfDay(new Date(yesterday))
           },
         },
       });
