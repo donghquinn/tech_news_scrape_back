@@ -23,7 +23,9 @@ export class ScrapedList {
     async getMatchingData(request: ListRequest) {
         try {
             const { date } = await listRequestValidator(request);
+            
             Logger.log(date);
+
             const result = await this.list.getMatchingData(date);
 
             return new SetResponse(200, { result });

@@ -41,15 +41,34 @@ export class GetList {
               end: endOfDay(new Date(date)),
             });
             
-            const naverData = await this.prisma.naverNews.findMany({ where: 
-                { founded: {
+            const naverData = await this.prisma.naverNews.findMany({ 
+                select: { title: true, originallink: true, founded: true },
+                where: {
+                  founded: {
                     gte: startOfDay(new Date(date)),
                     lte: endOfDay(new Date(date))
-                } } 
+                  },
+                }, 
             });
-            const bbcData = await this.prisma.bbcTechNews.findMany({ where: { founded: date } });
+
+            const bbcData = await this.prisma.bbcTechNews.findMany({ select: { post: true, link: true, founded: true },
+                orderBy: { rank: 'desc' },
+                where: {
+                  founded: {
+                    gte: startOfDay(new Date(date)),
+                    lte: endOfDay(new Date(date))
+                  },
+                }, });
             const climateData = await this.prisma.climate.findMany({ where: { founded: date } });
-            const hackerData = await this.prisma.hackers.findMany({ where: { founded: date } });
+
+            const hackerData = await this.prisma.hackers.findMany({ select: { post: true, link: true, founded: true },
+                orderBy: { rank: 'desc' },
+                where: {
+                  founded: {
+                    gte: startOfDay(new Date(date)),
+                    lte: endOfDay(new Date(date))
+                  },
+                }, });
 
             return {
                 naverData,

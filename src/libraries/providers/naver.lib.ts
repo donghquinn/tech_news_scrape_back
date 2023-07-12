@@ -12,7 +12,7 @@ export class NaverProvider {
     try {
       const yesterday = moment(today).subtract(1, 'day').toString();
 
-      Logger.debug("YesterDay: %o", { 
+      Logger.debug("Naver YesterDay: %o", { 
         start: startOfDay(new Date(yesterday)),
         end: endOfDay(new Date(yesterday)),
       });
